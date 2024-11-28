@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { getSystemPrompt } from './prompts';
 
 dotenv.config();
 
@@ -14,11 +15,11 @@ if(!GEMINI_API_KEY) {
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ 
     model: "gemini-1.5-flash",
-    systemInstruction: "Generate clean, production-ready code with accessibility features and proper comments.",
+    systemInstruction: getSystemPrompt(),
     tools: [{codeExecution:{}}], 
 });
 
-const prompt = "build a small todolist website using typescript and vite react js";
+const prompt = "build a basic weather app";
 
 try {
 const result = await model.generateContentStream(prompt);
