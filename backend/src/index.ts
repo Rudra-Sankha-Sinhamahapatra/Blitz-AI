@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { getSystemPrompt } from "./prompts";
 import express from "express";
 import { message2, message5 } from "./messages";
 import { nodeBasePrompt } from "./defaults/node";
 import { reactBasePrompt } from "./defaults/react";
+import { getSystemPrompt } from "./prompts";
 
 // import { main } from "./main";
 
@@ -69,6 +69,32 @@ app.post("/template", async (req: any, res: any) => {
 });
 
 // main();
+
+app.post("/chat",async(req:any,res:any)=>{
+ const messages = req.body.messages;
+
+ if (!GEMINI_API_KEY) {
+    throw Error("No api key found");
+  }
+  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    systemInstruction: getSystemPrompt(),
+    tools: [{ codeExecution: {} }],
+  });
+
+ const response = await model.generateContent({
+    contents: messages
+  });
+
+  console.log(response.response.text());
+
+  res.json({
+    response:response.response.text()
+  });
+
+})
 
 app.listen(3000, () => {
   console.log("Server is firing");
