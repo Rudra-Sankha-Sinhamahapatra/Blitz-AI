@@ -42,6 +42,18 @@ Before you get started, ensure you have the following installed on your local ma
 - **npm** (v7 or higher) or **yarn** (for package management)
 - **TypeScript** (optional if you're using `ts-node`)
 
+# Basic Project Architecture 
+- User gives a prompt 
+- Server forwards the prompt to the LLM on /template endpoint
+- LLM responds that whether the user prompt is related to Node Js or React Js
+- We have a react base prompt,node base prompt . Also we have a basic instruction for the LLM. After response comes from /template endpoint. If the respose is node then we use node js base template or if the response is react we use react js base template . 
+- From the response we got from the /template endpoint it returns two messages ,we forward it to the LLM as default 
+- With that two responses we include the user prompt,these 3 combines a user prompt
+- So base prompt,react/node base prompt,user prompt these sent to the LLM and it starts to create the app based on react or node 
+
+![Excalidraw Drawing](./docs/images/working.png)
+
+
 ### 1. Clone the Repository
 
 Start by cloning the repository to your local machine:
@@ -211,6 +223,7 @@ The response could be:
 The `docs` folder contains project structure diagrams created with Excalidraw. These diagrams help visualize the architecture and components of the project, making it easier to understand the design and flow of the system.
 
 - Install the Excalidraw extension on VS Code to access the docs
+- Here is a basic structure about the Project Architecture
 ---
 
 ## Contributing
