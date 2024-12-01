@@ -82,7 +82,7 @@ npm install
 
 To ensure that the frontend can communicate with the backend, you may need to set the backend URL. Create a `.env` file in the `frontend` folder with the following content:
 ```bash
-VITE_BACKEND_URL=http://localhost:5000
+VITE_BACKEND_URL=http://localhost:3000
 ```
 
 #### 2.3. Start the Frontend Development Server
