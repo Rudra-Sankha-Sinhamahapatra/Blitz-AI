@@ -5,13 +5,14 @@ import { message2, message5 } from "./messages";
 import { nodeBasePrompt } from "./defaults/node";
 import { reactBasePrompt } from "./defaults/react";
 import { getSystemPrompt } from "./prompts";
-
+import cors from 'cors'
 // import { main } from "./main";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
@@ -87,8 +88,6 @@ app.post("/chat",async(req:any,res:any)=>{
  const response = await model.generateContent({
     contents: messages
   });
-
-  console.log(response.response.text());
 
   res.json({
     response:response.response.text()
