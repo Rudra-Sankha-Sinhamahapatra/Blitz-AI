@@ -1,10 +1,21 @@
-import { Sparkles, Zap, Globe, Menu } from 'lucide-react'; // Import Menu icon
-import PromptInput from '../components/prompt/PromptInput';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Sparkles, Zap, Globe, Wand2, Menu } from 'lucide-react';
+import Button from '../components/ui/Button';
 
-export default function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false); 
 
+export function Home() {
+  const [prompt, setPrompt] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    if (prompt.trim()) {
+      navigate('/builder', { state: { prompt } });
+    }
+  };
 
   const features = [
     {
@@ -25,18 +36,14 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent relative">
-      {/* Hamburger Menu */}
-      <div className="absolute top-4 left-4">
+    <div className="min-h-screen bg-transparent">
+        <div className="absolute top-4 left-4">
         <button
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-          onClick={() => setMenuOpen(!menuOpen)} // Toggle menu visibility
         >
           <Menu className="w-6 h-6 text-gray-800 dark:text-gray-200" />
         </button>
       </div>
-
-      {/* Page Content */}
       <div className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-16 relative">
           <div className="flex justify-center mb-6">
@@ -54,8 +61,29 @@ export default function HomePage() {
           </p>
         </div>
 
-        <PromptInput />
-
+        <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto">
+      <div className="relative">
+        <textarea
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Describe your dream website in detail..."
+          className="w-full h-40 p-4 text-lg border-2 border-gray-200 rounded-xl
+                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                     transition-all duration-200 resize-none
+                     placeholder:text-gray-400"
+        />
+        <div className="absolute bottom-4 right-4 flex space-x-2">
+          <Button
+            type="submit"
+            isLoading={isLoading}
+            icon={<Wand2 className="w-4 h-4" />}
+            size="lg"
+          >
+            Generate Website
+          </Button>
+        </div>
+      </div>
+    </form>
         <div className="grid md:grid-cols-3 gap-8 mt-20">
           {features.map((feature, index) => (
             <div
