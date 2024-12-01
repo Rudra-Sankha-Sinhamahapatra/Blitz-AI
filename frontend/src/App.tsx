@@ -1,23 +1,23 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './contexts/ThemeContext';
-import HomePage from './pages/HomePage';
-import BuilderPage from './pages/BuilderPage';
+import { Home } from './pages/Home';
+import { Builder } from './pages/Builder';
+import Glow from './components/Glow';
+import { ThemeProvider } from './components/contexts/ThemeContexts';
 import ThemeToggle from './components/ui/ThemeToggle';
-import Glow from './components/effects/Glow';
 
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-        <Glow />
-        <ThemeToggle />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/builder" element={<BuilderPage />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+    <Glow/>
+    <ThemeToggle/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/builder" element={<Builder />} />
+      </Routes>
+    </BrowserRouter>
+    </div>
     </ThemeProvider>
   );
 }
