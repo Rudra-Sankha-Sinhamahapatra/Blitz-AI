@@ -58,7 +58,7 @@ Before you get started, ensure you have the following installed on your local ma
 
 Start by cloning the repository to your local machine:
 ```bash
-git clone https://github.com/Rudra-Sankha-Sinhamahapatra/Blitz-AI.git
+git clone https://github.com/Rudra-Sankha-Sinhamahapatra/Blitz-AI
 cd Blitz-AI
 ```
 
@@ -92,7 +92,7 @@ Once the dependencies are installed, you can start the frontend development serv
 npm run dev
 ```
 
-The frontend will now be accessible at `http://localhost:3000`.
+The frontend will now be accessible at `http://localhost:5173`.
 
 ### 3. Setup Backend
 
@@ -124,7 +124,7 @@ Once the dependencies are installed and the `.env` file is configured, you can s
 npm run dev
 ```
 
-The backend server will now be running at `http://localhost:5000`.
+The backend server will now be running at `http://localhost:3000`.
 
 ---
 
