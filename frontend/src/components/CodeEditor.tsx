@@ -21,7 +21,7 @@ export function CodeEditor({ file }: CodeEditorProps) {
       theme="vs-dark"
       value={file.content || ''}
       options={{
-        readOnly: true,
+        readOnly: false,
         minimap: { enabled: false },
         fontSize: 14,
         wordWrap: 'on',

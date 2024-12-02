@@ -121,7 +121,7 @@ export function Builder() {
         })
       );
     }
-    console.log(files);
+    // console.log(files);
   }, [steps, files]);
 
   useEffect(() => {
@@ -170,7 +170,7 @@ export function Builder() {
     const mountStructure = createMountStructure(files);
 
     // Mount the structure if WebContainer is available
-    console.log(mountStructure);
+    // console.log(mountStructure);
     webcontainer?.mount(mountStructure);
   }, [files, webcontainer]);
 
@@ -243,7 +243,7 @@ export function Builder() {
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <header className="bg-blue-900 border-b border-gray-700 px-6 py-4 shadow-lg">
-        <h1 className="text-xl font-semibold text-gray-100">Website Builder</h1>
+        <h1 className="text-xl font-semibold text-gray-100">Blitz AI</h1>
         <p className="text-sm text-gray-400 mt-1">Prompt: {prompt}</p>
       </header>
 

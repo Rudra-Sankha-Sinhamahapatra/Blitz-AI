@@ -11,23 +11,28 @@ export function PreviewFrame({ files, webContainer }: PreviewFrameProps) {
   const [url, setUrl] = useState("");
 
   async function main() {
+    try{
     const installProcess = await webContainer.spawn('npm', ['install']);
 
     installProcess.output.pipeTo(new WritableStream({
       write(data) {
-        console.log(data);
+        // console.log(data);
       }
     }));
 
+    await installProcess.exit;
     await webContainer.spawn('npm', ['run', 'dev']);
 
     // Wait for `server-ready` event
     webContainer.on('server-ready', (port, url) => {
       // ...
-      console.log(url)
-      console.log(port)
+      // console.log(url)
+      // console.log(port)
       setUrl(url);
     });
+  } catch(error){
+     console.log(error);
+  }
   }
 
   useEffect(() => {
