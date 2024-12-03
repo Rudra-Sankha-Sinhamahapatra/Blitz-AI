@@ -1,9 +1,10 @@
+# Blitz-AI  
 
-# Blitz-AI
+Blitz-AI is an innovative platform designed to help users generate full-stack applications effortlessly. Whether you need a React.js frontend or a Node.js backend, Blitz-AI has you covered. Powered by AI and leveraging web containers, it enables users to generate, run, and preview React projects directly in the browser, offering a seamless development experience without the need for local setup.  
 
-Blitz-AI is an application built with AI-powered content generation, offering a real-time web interface to interact with AI models for various tasks. This project uses **Node.js**, **Express.js**, **Gemini API**, **TypeScript** for the backend, and **Vite**, **React.js**, **Tailwind CSS**, and **Lucide React** for the frontend.
+This project combines the power of **Node.js**, **Express.js**, **Gemini API**, and **TypeScript** for the backend with **Vite**, **React.js**, **Tailwind CSS**,**Web Containers** and **Lucide React** for the frontend.  
 
----
+---  
 
 ## Tech Stack
 
