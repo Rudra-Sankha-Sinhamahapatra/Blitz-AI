@@ -1,8 +1,9 @@
 import { WebContainer } from '@webcontainer/api';
 import  { useEffect, useState } from 'react';
+import { FileItem } from '../types';
 
 interface PreviewFrameProps {
-  files: any[];
+  files: FileItem[];
   webContainer: WebContainer;
 }
 
@@ -12,6 +13,7 @@ export function PreviewFrame({ files, webContainer }: PreviewFrameProps) {
 
   async function main() {
     try{
+      // await webContainer.mount(files.map((file)=>file.content))
     const installProcess = await webContainer.spawn('npm', ['install']);
 
     installProcess.output.pipeTo(new WritableStream({
@@ -31,7 +33,7 @@ export function PreviewFrame({ files, webContainer }: PreviewFrameProps) {
       setUrl(url);
     });
   } catch(error){
-     console.log(error);
+     console.log('error happened during preview: ',error);
   }
   }
 

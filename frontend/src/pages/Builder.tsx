@@ -83,8 +83,8 @@ export function Builder() {
                 });
               } else {
                 file.content = cleanCodeResponse(step.code ?? "");
-                // console.log('Before Cleaning:', step.code);
-                // console.log('After Cleaning:', cleanCodeResponse(step.code));
+                console.log('Before Cleaning:', step.code);
+                console.log('After Cleaning:', cleanCodeResponse(step.code??""));
               }
             } else {
               /// in a folder
@@ -121,7 +121,7 @@ export function Builder() {
         })
       );
     }
-    // console.log(files);
+    console.log('files: ',files);
   }, [steps, files]);
 
   useEffect(() => {
@@ -170,8 +170,8 @@ export function Builder() {
     const mountStructure = createMountStructure(files);
 
     // Mount the structure if WebContainer is available
-    // console.log(mountStructure);
-    webcontainer?.mount(mountStructure);
+    console.log('mount-structure: ',mountStructure);
+     webcontainer?.mount(mountStructure);
   }, [files, webcontainer]);
 
   async function init() {
