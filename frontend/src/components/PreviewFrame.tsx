@@ -11,6 +11,7 @@ export function PreviewFrame({ files, webContainer }: PreviewFrameProps) {
   // In a real implementation, this would compile and render the preview
   const [url, setUrl] = useState("");
 
+
   async function main() {
     try{
       // await webContainer.mount(files.map((file)=>file.content))

@@ -4,6 +4,12 @@ import { FileItem } from '../types';
 interface CodeEditorProps {
   file: FileItem | null;
 }
+const cleanCodeResponse = (response: string): string => {
+  return response
+    .replace(/^```[a-z]*\s*\n([\s\S]*?)\n```$/gm, "$1") // Handles code blocks at the start/end of the string
+    .replace(/```[a-z]*\s*\n([\s\S]*?)\n```/g, "$1") // Handles code blocks within text
+    .trim(); // Removes leading/trailing whitespace
+};
 
 export function CodeEditor({ file }: CodeEditorProps) {
   if (!file) {
@@ -19,7 +25,7 @@ export function CodeEditor({ file }: CodeEditorProps) {
       height="100%"
       defaultLanguage="typescript"
       theme="vs-dark"
-      value={file.content || ''}
+      value={cleanCodeResponse(file.content ||'')}
       options={{
         readOnly: false,
         minimap: { enabled: false },

@@ -46,8 +46,8 @@ export function Builder() {
 
   const cleanCodeResponse = (response: string): string => {
     return response
-      .replace(/```\s*[a-z]*\s*\n([\s\S]*?)\n```/g, "$1") // Handles language-specific code blocks
-      .replace(/```\s*\n([\s\S]*?)\n```/g, "$1") // Handles generic code blocks
+      .replace(/^```[a-z]*\s*\n([\s\S]*?)\n```$/gm, "$1") // Handles code blocks at the start/end of the string
+      .replace(/```[a-z]*\s*\n([\s\S]*?)\n```/g, "$1") // Handles code blocks within text
       .trim(); // Removes leading/trailing whitespace
   };
 
@@ -239,6 +239,41 @@ export function Builder() {
   useEffect(() => {
     init();
   }, []);
+
+  useEffect(() => {
+    const ensureProjectStructure = () => {
+      // Check if package.json exists
+      const hasPackageJson = files.some(file => file.name === 'package.json');
+      
+      if (!hasPackageJson) {
+        const packageJsonFile: FileItem = {
+          name: 'package.json',
+          type: 'file',
+          path: '/package.json',
+          content: JSON.stringify({
+            name: "preview-app",
+            version: "0.0.1",
+            scripts: {
+              "dev": "vite",
+              "build": "vite build"
+            },
+            dependencies: {
+              "react": "^18.2.0",
+              "react-dom": "^18.2.0"
+            },
+            devDependencies: {
+              "@vitejs/plugin-react": "^4.0.0",
+              "vite": "^4.3.0"
+            }
+          }, null, 2)
+        };
+        
+        setFiles(prevFiles => [...prevFiles, packageJsonFile]);
+      }
+    };
+  
+    ensureProjectStructure();
+  }, [files]);
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
